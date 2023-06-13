@@ -9,16 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Frontend Mentor | Huddle landing page with single introductory section</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
         @font-face {
             font-family: Poppins;
-            src: url(../fonts/Nunito/Nunito-SemiBold.ttf);
+            /* src: url(../fonts/Poppins/Poppins-SemiBold.ttf); */
+            src: url(./font/poppins/Poppins-SemiBold.ttf);
             font-style: normal;
             font-weight: 600;
         }
@@ -87,9 +86,10 @@
         .texts {
             padding-top: 2.5rem;
             display: flex;
-            width: 43%;
+            width: 36%;
             justify-content: center;
             align-items: flex-start;
+            margin-right: 0;
             /* padding-top: 3rem; */
         }
         
@@ -97,34 +97,57 @@
             font-size: 2.5rem;
             font-weight: 600;
             margin-top: 3rem;
-            font-family: 'Open Sans', sans-serif;
+            /* font-family: 'Open Sans', sans-serif; */
         }
         
         p {
             font-size: 1.2rem;
             margin-top: 2rem;
             font-weight: 400;
+            line-height: 1.5rem;
+            font-family: 'Open Sans', sans-serif;
         }
         
         button {
-            display: block;
-            margin-top: 2rem;
-            /* width: 12rem; */
-            font-size: 18px;
-            padding: 16px 50px;
-            /* height: 2.5rem; */
-            color: hsl(257, 40%, 49%);
-            background-color: white;
-            text-align: center;
-            border: none;
-            transition: .5s;
-            box-shadow: 0 5px 7px #445566;
+            width: 150px;
             border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            background-color: white;
+            color: hsl(257, 40%, 49%);
+            font-weight: 400;
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        button::before {
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            position: absolute;
+            left: var(--xPos);
+            top: var(--yPos);
+            background-color: hsl(300, 69%, 71%);
+            transform: translate(-50%, -50%);
+            /* z-index: -1; */
+            content: "";
+            transition: width .5s, height .5s;
         }
         
         button:hover {
-            background-color: hsl(300, 69%, 71%);
             color: white;
+        }
+        
+        button:hover::before {
+            width: 350px;
+            height: 350px;
         }
         
         .links {
@@ -143,9 +166,9 @@
         
         .link {
             /* margin-left: 10px; */
-            width: 2rem;
+            width: 2.2rem;
             font-size: 18px;
-            height: 2rem;
+            height: 2.2rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -155,9 +178,14 @@
             border: 1px solid white;
         }
         
+        .link:hover {
+            border-color: hsl(300, 69%, 71%);
+            color: hsl(300, 69%, 71%);
+        }
+        
         @media (max-width:450px) {
             body {
-                padding-bottom: 10rem;
+                padding-bottom: 6rem;
             }
             body::before {
                 background: url(./images/bg-mobile.svg);
@@ -169,9 +197,17 @@
                 opacity: .9;
                 z-index: -1;
             }
+            main {
+                /* height: 80%; */
+                margin-top: 1rem;
+                gap: 1rem;
+                justify-content: unset;
+                /* margin: 5rem 0 10rem 0; */
+                flex-direction: column;
+            }
             .logo {
                 width: 10rem;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             .logo img {
                 width: 100%;
@@ -179,11 +215,6 @@
             .links {
                 left: 50%;
                 transform: translateX(-50%);
-            }
-            main {
-                margin-top: 2rem;
-                /* margin: 5rem 0 10rem 0; */
-                flex-direction: column;
             }
             .image {
                 width: 100%;
@@ -195,9 +226,11 @@
             }
             h1 {
                 font-size: 30px;
+                margin-top: 1rem;
             }
             p {
-                font-size: 20px;
+                margin-top: 1rem;
+                font-size: 18px;
             }
             .texts>div {
                 display: flex;
@@ -221,7 +254,7 @@
                 <div>
                     <h1>Build The Community <br> Your Fans Will Love</h1>
                     <p> Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create connections with your users as you engage in genuine discussion.</p>
-                    <button>Register</button>
+                    <button class="btn"><span>Register</span></button>
                 </div>
 
             </div>
@@ -233,6 +266,19 @@
             <div class="link "><i class="fa-brands fa-instagram"></i></div>
         </div>
     </div>
+
+    <script>
+        const btnEl = document.querySelector(".btn")
+
+
+        btnEl.addEventListener("mouseover", (event) => {
+            const y = (event.pageY - btnEl.offsetTop)
+            const x = (event.pageX - btnEl.offsetLeft);
+
+            btnEl.style.setProperty("--xPos", x + "px")
+            btnEl.style.setProperty("--yPos", y + "px")
+        })
+    </script>
     <!-- 
     <footer>
         <p class="attribution ">
