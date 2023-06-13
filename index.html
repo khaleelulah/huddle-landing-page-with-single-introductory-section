@@ -183,10 +183,8 @@
         
         @media (max-width:450px) {
             body {
-                padding-bottom: 6rem;
-                /* display: block; */
-                justify-content: unset;
-                align-items: unset;
+                /* padding-bottom: 5rem; */
+                display: block;
             }
             body::before {
                 background: url(./images/bg-mobile.svg);
@@ -194,13 +192,15 @@
                 width: 100%;
                 inset: 0;
                 position: absolute;
-                height: 60vh;
+                height: 50vh;
                 opacity: .9;
                 z-index: -1;
             }
             main {
                 /* height: 80%; */
                 margin-top: 1rem;
+                /* margin-bottom: 12rem; */
+                /* padding-bottom: 5rem; */
                 gap: 1rem;
                 justify-content: unset;
                 /* margin: 5rem 0 10rem 0; */
@@ -214,6 +214,7 @@
                 width: 100%;
             }
             .links {
+                bottom: 10px;
                 left: 50%;
                 transform: translateX(-50%);
             }
